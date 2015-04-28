@@ -1,0 +1,7 @@
+{
+  "undef": true,
+  "globalstrict": false,
+  "globals": {
+    "node": true
+  }
+}

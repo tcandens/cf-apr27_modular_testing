@@ -8,7 +8,9 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     jshint: {
-      options: {},
+      options: {
+        jshintrc: '.jshintrc'
+      },
       files: ['test/*.js', 'lib/*.js']
     },
     mochaTest: {
