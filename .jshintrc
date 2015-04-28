@@ -1,7 +1,13 @@
 {
   "undef": true,
   "globalstrict": false,
+  "node": true,
   "globals": {
-    "node": true
+    "describe": true,
+    "it": true,
+    "before": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true
   }
 }

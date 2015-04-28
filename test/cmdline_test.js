@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect;
-var cmdline = require('../lib/cmdline')
+var cmdline = require('../lib/cmdline');
 
 describe('cmdline.js', function() {
   describe('Easy way', function() {
@@ -24,5 +24,5 @@ describe('cmdline.js', function() {
     it('Should use actual process.argv and output greeting', function() {
       expect(cmdline(process.argv)).to.eql('Hello, Arthur!');
     });
-  })
+  });
 });

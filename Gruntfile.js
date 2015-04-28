@@ -7,20 +7,57 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.initConfig({
+    watch: {
+      gruntfile: {
+        src: ['Gruntfile.js'],
+        task: ['jshint:gruntfile']
+      },
+      dev: {
+        src: ['lib/**/*.js'],
+        task: ['jshint:dev']
+      },
+      test: {
+        src: ['test/**/*.js'],
+        task: ['jshint:test', 'mochaTest']
+      },
+      all: {
+        src: ['**/*.js', '!node_modules/'],
+        task: ['jshint:all'],
+        options: {
+          spawn: false
+        }
+      }
+    },
     jshint: {
+      gruntfile: {
+        src: ['Gruntfile.js']
+      },
+      dev: {
+        src: ['lib/**/*.js']
+      },
+      test: {
+        src: ['test/**/*.js']
+      },
+      all: {
+        src: ['**/*.js', '!node_modules/']
+      },
       options: {
         jshintrc: '.jshintrc'
-      },
-      files: ['test/*.js', 'lib/*.js']
+      }
     },
     mochaTest: {
       options: {
         quite: false
       },
-      src: ['test/**/*.js']
+      files: ['test/**/*.js']
     }
   });
-  // grunt.registerTask('default', []);
-  grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('lint', ['jshint'])
-}
+
+  grunt.registerTask('hint', ['jshint:all']);
+  grunt.registerTask('test', ['hint', 'mochaTest']);
+  grunt.registerTask('default', ['jshint:all', 'mochaTest', 'watch:all']);
+
+  grunt.event.on('default', function( action, filepath) {
+    grunt.config('jshint.all.src', filepath );
+  });
+};
