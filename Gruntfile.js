@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     jshint: {
+      options: {},
       files: ['test/*.js', 'lib/*.js']
     },
     mochaTest: {
@@ -19,5 +20,5 @@ module.exports = function(grunt) {
   });
   // grunt.registerTask('default', []);
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('jshint' ['jshint'])
+  grunt.registerTask('lint', ['jshint'])
 }
