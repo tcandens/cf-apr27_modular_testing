@@ -9,23 +9,23 @@ module.exports = function(grunt) {
   grunt.initConfig({
     watch: {
       gruntfile: {
-        src: ['Gruntfile.js'],
+        files: ['Gruntfile.js'],
         task: ['jshint:gruntfile']
       },
       dev: {
-        src: ['lib/**/*.js'],
+        files: ['lib/**/*.js'],
         task: ['jshint:dev']
+      },
+      all: {
+        files: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js'],
+        tasks: ['jshint:all'],
+        options: {
+          spawn: false
+        }
       },
       test: {
         src: ['test/**/*.js'],
         task: ['jshint:test', 'mochaTest']
-      },
-      all: {
-        src: ['**/*.js', '!node_modules/'],
-        task: ['jshint:all'],
-        options: {
-          spawn: false
-        }
       }
     },
     jshint: {
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
         src: ['test/**/*.js']
       },
       all: {
-        src: ['**/*.js', '!node_modules/']
+        src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js']
       },
       options: {
         jshintrc: '.jshintrc'
@@ -57,7 +57,8 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['hint', 'mochaTest']);
   grunt.registerTask('default', ['jshint:all', 'mochaTest', 'watch:all']);
 
-  grunt.event.on('default', function( action, filepath) {
-    grunt.config('jshint.all.src', filepath );
+  grunt.event.on('watch', function( action, filepath ) {
+    grunt.config('jshint.all.src', filepath);
   });
+
 };
